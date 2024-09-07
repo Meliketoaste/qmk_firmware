@@ -15,4 +15,17 @@
  */
 
 #pragma once
-#define FORCE_NKRO
+
+// Myriad boilerplate
+#undef MYRIAD_ENABLE
+
+// Debounce reduces chatter (unintended double-presses) - set 0 if debouncing is not needed
+#define DEBOUNCE 5
+
+#define LEADER_NO_TIMEOUT
+
+#define PERMISSIVE_HOLD
+
+
+
+
