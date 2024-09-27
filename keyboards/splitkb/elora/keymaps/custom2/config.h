@@ -24,8 +24,6 @@
 
 #define LEADER_NO_TIMEOUT
 
+#define TAPPING_TERM 175
 #define PERMISSIVE_HOLD
-
-
-
-
+#define QUICK_TAP_TERM_PER_KEY

@@ -58,6 +58,18 @@ enum my_keycodes {
 #define DVORAK   DF(_DVORAK)
 #define NORMAL   DF(_NORMAL)
 
+#define CTL_TAP   LCTL_T(KC_BSPC)
+
+
+
+
+#define HOME_SLSH MT(MOD_RGUI, KC_SLSH);
+#define HOME_Q MT(MOD_LGUI, KC_Q)
+#define HOME_P MT(MOD_LGUI, KC_P)
+
+#define SYM_SCLN LT(_SYM, S(KC_COMM))
+
+
 #define SYM      MO(_SYM)
 #define RSALT      MO(_RSALT)
 #define LSALT      MO(_LSALT)
@@ -74,29 +86,40 @@ enum my_keycodes {
 
 
 
+#define SYM_A LT(_SYM, KC_A)
+#define LALT_S MT(MOD_LALT, KC_S)
+#define LSFT_D MT(MOD_LSFT, KC_D)
+#define LCTL_F MT(MOD_LCTL, KC_F)
+
+#define LALT_L MT(MOD_LALT, KC_L)
+#define RSFT_K MT(MOD_RSFT, KC_K)
+#define LCTL_J MT(MOD_LCTL, KC_J)
+
+#define BACK_CTL LCTL_T(KC_BSPC)
+
 // Note: LAlt/Enter (ALT_ENT) is not the same thing as the keyboard shortcut Alt+Enter.
 // The notation `mod/tap` denotes a key that activates the modifier `mod` when held down, and
 // produces the key `tap` when tapped (i.e. pressed and released).
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-//    ┌─────────┬───────────┬───────────┬───────────┬───────────┬────────────────┐     ┌──────┐   ┌───────┐      ┌───────┬───────────┬───────────┬───────────┬─────────────────┬───────┐
-//    │   esc   │     1     │     2     │     3     │     4     │       5        │     │ lsft │   │ rsft  │      │   6   │     7     │     8     │     9     │        0        │  FOO  │
-//    ├─────────┼───────────┼───────────┼───────────┼───────────┼────────────────┤     ├──────┤   ├───────┤      ├───────┼───────────┼───────────┼───────────┼─────────────────┼───────┤
-//    │   tab   │     q     │     w     │     e     │     r     │       t        │     │ lctl │   │ rctl  │      │   y   │     u     │     i     │     o     │        p        │ bspc  │
-//    ├─────────┼───────────┼───────────┼───────────┼───────────┼────────────────┤     ├──────┤   ├───────┤      ├───────┼───────────┼───────────┼───────────┼─────────────────┼───────┤
-//    │ CTL_ESC │ LGUI_T(a) │ LALT_T(s) │ LSFT_T(d) │ LCTL_T(f) │       g        │     │ lalt │   │ ralt  │      │   h   │ RCTL_T(j) │ RSFT_T(k) │ LALT_T(l) │ RGUI_T(NO_OSTR) │ NO_AE │
-//    ├─────────┼───────────┼───────────┼───────────┼───────────┼────────────────┼─────┼──────┤   ├───────┼──────┼───────┼───────────┼───────────┼───────────┼─────────────────┼───────┤
-//    │  lsft   │     z     │     x     │     c     │     v     │       b        │  [  │ caps │   │ FKEYS │  ]   │   n   │     m     │     ,     │     .     │        /        │ rsft  │
-//    └─────────┴───────────┴───────────┼───────────┼───────────┼────────────────┼─────┼──────┤   ├───────┼──────┼───────┼───────────┼───────────┼───────────┴─────────────────┴───────┘
-//                                      │  ADJUST   │   lgui    │ LT(LSALT, ent) │ spc │ NAV  │   │  SYM  │ lctl │ RSALT │   rgui    │    app    │
-//                                      └───────────┴───────────┴────────────────┴─────┴──────┘   └───────┴──────┴───────┴───────────┴───────────┘
+//    ┌──────┬────────┬───────────┬───────────┬───────────┬─────────────┐     ┌──────┐   ┌───────┐         ┌──────────────┬───────────┬───────────┬───────────┬──────────┬─────────┐
+//    │ esc  │   1    │     2     │     3     │     4     │      5      │     │ lsft │   │ rsft  │         │      6       │     7     │     8     │     9     │    0     │   FOO   │
+//    ├──────┼────────┼───────────┼───────────┼───────────┼─────────────┤     ├──────┤   ├───────┤         ├──────────────┼───────────┼───────────┼───────────┼──────────┼─────────┤
+//    │ tab  │ HOME_Q │     w     │     e     │     r     │      t      │     │ lctl │   │ rctl  │         │      y       │     u     │     i     │     o     │  HOME_P  │  bspc   │
+//    ├──────┼────────┼───────────┼───────────┼───────────┼─────────────┤     ├──────┤   ├───────┤         ├──────────────┼───────────┼───────────┼───────────┼──────────┼─────────┤
+//    │ lctl │ SYM_A  │ LALT_T(s) │ LSFT_T(d) │ LCTL_T(f) │      g      │     │ lalt │   │ ralt  │         │      h       │ RCTL_T(j) │ RSFT_T(k) │ LALT_T(l) │ SYM_SCLN │ NO_QUOT │
+//    ├──────┼────────┼───────────┼───────────┼───────────┼─────────────┼─────┼──────┤   ├───────┼─────────┼──────────────┼───────────┼───────────┼───────────┼──────────┼─────────┤
+//    │ lsft │   z    │     x     │     c     │     v     │      b      │  [  │ caps │   │ FKEYS │    ]    │      n       │     m     │     ,     │     .     │    /     │  rsft   │
+//    └──────┴────────┴───────────┼───────────┼───────────┼─────────────┼─────┼──────┤   ├───────┼─────────┼──────────────┼───────────┼───────────┼───────────┴──────────┴─────────┘
+//                                │  ADJUST   │   lgui    │ LALT_T(ent) │ spc │ NAV  │   │  SYM  │ CTL_TAP │ LCTL_T(bspc) │   rsft    │    app    │
+//                                └───────────┴───────────┴─────────────┴─────┴──────┘   └───────┴─────────┴──────────────┴───────────┴───────────┘
 [_QWERTY] = LAYOUT(
-  KC_ESC  , KC_1         , KC_2         , KC_3         , KC_4         , KC_5              ,           KC_LSFT ,     KC_RSFT ,           KC_6  , KC_7         , KC_8         , KC_9         , KC_0            , FOO    ,
-  KC_TAB  , KC_Q         , KC_W         , KC_E         , KC_R         , KC_T              ,           KC_LCTL ,     KC_RCTL ,           KC_Y  , KC_U         , KC_I         , KC_O         , KC_P            , KC_BSPC,
-  CTL_ESC , LGUI_T(KC_A) , LALT_T(KC_S) , LSFT_T(KC_D) , LCTL_T(KC_F) , KC_G              ,           KC_LALT ,     KC_RALT ,           KC_H  , RCTL_T(KC_J) , RSFT_T(KC_K) , LALT_T(KC_L) , RGUI_T(NO_OSTR) , NO_AE  ,
-  KC_LSFT , KC_Z         , KC_X         , KC_C         , KC_V         , KC_B              , KC_LBRC , KC_CAPS ,     FKEYS   , KC_RBRC , KC_N  , KC_M         , KC_COMM      , KC_DOT       , KC_SLSH         , KC_RSFT,
-                                          ADJUST       , KC_LGUI      , LT(LSALT, KC_ENT) , KC_SPC  , NAV     ,     SYM     , KC_LCTL , RSALT , KC_RGUI      , KC_APP
+  KC_ESC  , KC_1   , KC_2         , KC_3         , KC_4         , KC_5           ,           KC_LSFT ,     KC_RSFT ,           KC_6            , KC_7         , KC_8         , KC_9         , KC_0     , FOO    ,
+  KC_TAB  , HOME_Q , KC_W         , KC_E         , KC_R         , KC_T           ,           KC_LCTL ,     KC_RCTL ,           KC_Y            , KC_U         , KC_I         , KC_O         , HOME_P   , KC_BSPC,
+  KC_LCTL , SYM_A  , LALT_T(KC_S) , LSFT_T(KC_D) , LCTL_T(KC_F) , KC_G           ,           KC_LALT ,     KC_RALT ,           KC_H            , RCTL_T(KC_J) , RSFT_T(KC_K) , LALT_T(KC_L) , SYM_SCLN , NO_QUOT,
+  KC_LSFT , KC_Z   , KC_X         , KC_C         , KC_V         , KC_B           , KC_LBRC , KC_CAPS ,     FKEYS   , KC_RBRC , KC_N            , KC_M         , KC_COMM      , KC_DOT       , KC_SLSH  , KC_RSFT,
+                                    ADJUST       , KC_LGUI      , LALT_T(KC_ENT) , KC_SPC  , NAV     ,     SYM     , CTL_TAP , LCTL_T(KC_BSPC) , KC_RSFT      , KC_APP
 ),
 
 //    ┌─────────┬───┬───┬────────┬──────┬─────────┐     ┌──────┐   ┌───────┐     ┌──────┬──────┬─────┬───┬───┬──────────┐
@@ -155,7 +178,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_PIPE , KC_BSLS , NO_SLSH , NO_ASTR , KC_MINS , KC_LBRC , KC_LCBR , _______ ,     _______ , KC_RCBR , KC_RBRC , KC_UNDS               , NO_LCBR               , NO_RCBR               , KC_SLSH , KC_QUES,
                                 _______ , _______ , _______ , _______ , _______ ,     _______ , _______ , _______ , _______               , _______
 ),
-
 //    ┌─────┬──────┬───────────────────────┬───────────────────────┬───────────────────────┬─────┐     ┌─────┐   ┌─────┐     ┌─────────┬─────────┬─────┬───┬─────────┬───────┐
 //    │     │      │                       │                       │                       │     │     │     │   │     │     │    6    │    7    │  8  │ 9 │    0    │  FOO  │
 //    ├─────┼──────┼───────────────────────┼───────────────────────┼───────────────────────┼─────┤     ├─────┤   ├─────┤     ├─────────┼─────────┼─────┼───┼─────────┼───────┤
@@ -287,6 +309,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (!process_achordion(keycode, record)) { return false; }
 
   switch (keycode) {
+
     case FOO:
       if (record->event.pressed) {
         // Do something when pressed
@@ -296,16 +319,64 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         // Do something else when release
       }
       return false; // Skip all further processing of this key
+        //
+     case SYM_SCLN:
+        if (record->tap.count && record->event.pressed) {
+            tap_code16(S(KC_COMM)); // Intercept hold function to send Ctrl-X
+            return false;             // Return true for normal processing of tap keycode
+            }
+        break;
     default:
       return true; // Process all other keycodes normally
   }
+    return true;
 }
+
+bool achordion_chord(uint16_t tap_hold_keycode,
+                     keyrecord_t* tap_hold_record,
+                     uint16_t other_keycode,
+                     keyrecord_t* other_record) {
+  // Also allow same-hand holds when the other key is in the rows outside the
+  // alphas. I need the `% (MATRIX_ROWS / 2)` because my keyboards are split.
+    //
+  uint8_t row = other_record->event.key.row % (MATRIX_ROWS / 2);
+  if (!(1 <= row && row <= 3)) { return true; }
+
+
+
+
+
+  switch (tap_hold_keycode) {
+    // Exceptionally allow symbol layer LTs + row 0 in same-hand chords.
+
+
+    case SYM_A:
+    case SYM_SCLN:
+      if (row == 0) { return true; }
+      break;
+    case CTL_TAP:
+      // Assuming you want to allow this key to work on the same hand.
+      return true;
+    case HOME_Q :
+        if (other_keycode >= KC_1 && other_keycode <= KC_5) {return true;}
+
+    case HOME_P :
+        if (other_keycode >= KC_6 && other_keycode <= KC_0) {return true;}
+
+    // Exceptionally allow G + J as a same-hand chord.
+  }
+
+  return achordion_opposite_hands(tap_hold_record, other_record);
+}
+
+//uint16_t achordion_streak_chord_timeout(uint16_t tap_hold_keycode, uint16_t next_keycode) {
+//  return 0;  // Default of 100 ms.
+//}
 
 //leader
 void leader_start_user(void) {
     // Do something when the leader key is pressed
 }
-
 void leader_end_user(void) {
     if (leader_sequence_one_key(KC_F)) {
         // Leader, f => Types the below string
@@ -319,6 +390,7 @@ void leader_end_user(void) {
     } else if (leader_sequence_two_keys(KC_A, KC_S)) {
         // Leader, a, s => GUI+S
         tap_code16(LGUI(KC_S));
+
     }
 }
 
